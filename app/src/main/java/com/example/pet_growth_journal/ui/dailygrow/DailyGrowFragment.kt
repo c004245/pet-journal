@@ -4,37 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.example.pet_growth_journal.databinding.FragmentHomeBinding
+import androidx.fragment.app.viewModels
+import com.example.pet_growth_journal.databinding.FragDailyGrowBinding
 
 class DailyGrowFragment : Fragment() {
-
-    private lateinit var homeViewModel: DailyGrowViewModel
-    private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragDailyGrowBinding? = null
     private val binding get() = _binding!!
+
+    private val dailyGrowViewModel: DailyGrowViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(DailyGrowViewModel::class.java)
-
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+    ): View {
+        _binding = FragDailyGrowBinding.inflate(inflater, container, false).apply {
+            viewModel = dailyGrowViewModel
+            lifecycleOwner = this@DailyGrowFragment
+        }
+        return binding.root
     }
 
     override fun onDestroyView() {

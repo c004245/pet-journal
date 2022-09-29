@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -12,6 +13,8 @@ import com.example.pet_growth_journal.databinding.ActivityMainBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
+import com.example.pet_growth_journal.ui.customeview.CustomBottomNavigationView
+import com.example.pet_growth_journal.util.DestinationChangeObserver
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,16 +28,39 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navView: BottomNavigationView = binding.navView
+    }
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
+    private fun setupDestinationChangeObserver() {
+        val callback =
+            NavController.OnDestinationChangedListener { controller, destination, arguments ->
+                MainApplication.currentFragment = destination.label.toString()
+                MainApplication.currentDirection = destination
+            }
+
+        lifecycle.addObserver(
+            DestinationChangeObserver(callback, findNavController(R.id.nav_host_fragment_activity_main))
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+    }
+
+//
+//        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+//        val appBarConfiguration = AppBarConfiguration(
+//            setOf(
+//                R.id.navigation_daily_grow, R.id.navigation_add, R.id.navigation_total
+//            )
+//        )
+//        setupActionBarWithNavController(navController, appBarConfiguration)
+//        navView.setupWithNavController(navController)
+//
+//        setClickListener()
+
+
+    private fun setOnClickListener() {
+//        binding.btnAddRecord.setOnClickListener {
+//            findNavController(R.id.nav_host_fragment_activity_main).navigate(
+//
+//            )
+//        }
     }
 
     private fun checkFcmToken() {

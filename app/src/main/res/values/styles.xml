@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Text.Pretendard.SemiBold" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Text.Pretendard.Light" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/pretendard_light</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Text.Pretendard.ExtraBold" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/pretendart_extrabold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+</resources>
