@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.example.pet_growth_journal.databinding.FragDailyGrowBinding
 
 class DailyGrowFragment : Fragment() {
@@ -13,6 +14,10 @@ class DailyGrowFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val dailyGrowViewModel: DailyGrowViewModel by viewModels()
+
+    private val dailyGrowAdapter by lazy {
+        DailyGrowAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +28,22 @@ class DailyGrowFragment : Fragment() {
             viewModel = dailyGrowViewModel
             lifecycleOwner = this@DailyGrowFragment
         }
+
+        initViewPager()
         return binding.root
+    }
+
+    private fun initViewPager() {
+        binding.vpGrowRecord.run {
+            offscreenPageLimit = 1
+            addItemDecoration(object : RecyclerView.ItemDecoration() {
+
+            })
+            setPageTransformer { page, position ->
+
+            }
+            adapter = dailyGrowAdapter
+        }
     }
 
     override fun onDestroyView() {
