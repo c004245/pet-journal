@@ -1,13 +1,14 @@
 package com.example.pet_growth_journal.ui.dailygrow
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pet_growth_journal.databinding.ItemDailyGrowBinding
 
-class DailyGrowAdapter: androidx.recyclerview.widget.ListAdapter<DailyGrowModel, DailyGrowAdapter.DailyGrowViewHolder>(DailyGrowDiffCallback()) {
+class DailyGrowAdapter: ListAdapter<DailyGrowModel, DailyGrowAdapter.DailyGrowViewHolder>(DailyGrowDiffCallback()) {
 
     class DailyGrowViewHolder(val binding: ItemDailyGrowBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(model: DailyGrowModel) {

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pet_growth_journal.databinding.FragDailyGrowBinding
 
@@ -30,6 +31,10 @@ class DailyGrowFragment : Fragment() {
         }
 
         initViewPager()
+
+        dailyGrowViewModel.dailyGrowModel.observe(viewLifecycleOwner, Observer {  dailyGrowModel ->
+            dailyGrowAdapter.submitList(dailyGrowModel)
+        })
         return binding.root
     }
 
