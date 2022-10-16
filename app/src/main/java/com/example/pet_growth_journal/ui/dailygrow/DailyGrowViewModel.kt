@@ -43,7 +43,7 @@ class DailyGrowViewModel @Inject constructor() : ViewModel() {
                 title = "ㅌㅔ스트",
                 time = "00",
                 category = Category.BATH,
-                emotion = Emotion.HAPPY,
+                emotion = Emotion.SAD,
                 weather = Weather.RAINY
             ),
         )
