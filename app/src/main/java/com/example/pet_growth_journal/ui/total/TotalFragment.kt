@@ -23,9 +23,7 @@ class TotalFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-
+    ): View {
         _binding = FragTotalBinding.inflate(inflater, container, false).apply {
             viewModel = totalViewModel
             lifecycleOwner = this@TotalFragment
