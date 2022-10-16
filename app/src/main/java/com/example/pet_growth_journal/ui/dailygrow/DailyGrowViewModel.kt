@@ -40,7 +40,7 @@ class DailyGrowViewModel @Inject constructor() : ViewModel() {
             DailyGrowModel(
                 id = 0,
                 thumbnail = "https://img.youtube.com/vi/6PlkYCfW0_U/0.jpg",
-                title = "ㅌㅔ스트",
+                title = "xo스트",
                 time = "00",
                 category = Category.BATH,
                 emotion = Emotion.SAD,
