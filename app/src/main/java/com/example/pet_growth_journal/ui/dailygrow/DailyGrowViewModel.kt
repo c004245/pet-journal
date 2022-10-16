@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DailyGrowViewModel @Inject constructor() : ViewModel() {
-    private val _isTodayRecord = MutableLiveData<Boolean>(true)
+    private val _isTodayRecord = MutableLiveData(true)
     val isTodayRecord: LiveData<Boolean>
         get() = _isTodayRecord
 
