@@ -28,6 +28,7 @@ class TotalFragment : Fragment() {
             viewModel = totalViewModel
             lifecycleOwner = this@TotalFragment
         }
+        
        return binding.root
     }
 
