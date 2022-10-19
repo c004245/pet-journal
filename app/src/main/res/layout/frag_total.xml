@@ -1,88 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
         <import type="androidx.lifecycle.LiveData" />
 
         <variable
             name="viewModel"
             type="com.example.pet_growth_journal.ui.total.TotalViewModel" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.total.TotalFragment">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/Text.Pretendard.ExtraBold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="21sp"
-        android:id="@+id/tv_total_view_title"
-        android:textColor="@color/black21"
-        android:text="@string/text_total_view"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp" />
-
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/iv_arrow_left"
-        app:layout_constraintStart_toStartOf="@+id/tv_total_view_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_total_view_title"
-        android:layout_marginTop="24dp"
-        android:id="@+id/iv_previous_month" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/Text.Pretendard.ExtraBold"
-        app:layout_constraintStart_toEndOf="@+id/iv_previous_month"
-        app:layout_constraintTop_toTopOf="@+id/iv_previous_month"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_previous_month"
-        android:layout_marginStart="4dp"
-        tools:text="4월"
-        android:id="@+id/tv_month"/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/iv_arrow_right"
-        app:layout_constraintStart_toEndOf="@+id/tv_total_view_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_total_view_title"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="4dp"
-        android:id="@+id/iv_next_month" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/cl_info"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_month"
-        android:background="@drawable/background_radius_8_purple">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.total.TotalFragment">
 
         <TextView
+            android:id="@+id/tv_total_view_title"
+            style="@style/Text.Pretendard.ExtraBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/NotoSansd"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:text="@string/text_total_view"
+            android:textColor="@color/black21"
+            android:textSize="21sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/tv_info_title"
-            android:text="건빵이의 6월 활동을 알려드릴게요!"
-            android:textColor="@color/white" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/iv_previous_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/iv_arrow_left"
+            app:layout_constraintStart_toStartOf="@+id/tv_total_view_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_view_title" />
+
+        <TextView
+            android:id="@+id/tv_month"
+            style="@style/Text.Pretendard.ExtraBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_previous_month"
+            app:layout_constraintStart_toEndOf="@+id/iv_previous_month"
+            app:layout_constraintTop_toTopOf="@+id/iv_previous_month"
+            tools:text="4월" />
+
+        <ImageView
+            android:id="@+id/iv_next_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/iv_arrow_right"
+            app:layout_constraintStart_toEndOf="@+id/tv_total_view_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_view_title" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_radius_8_purple"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_month">
+
+            <TextView
+                android:id="@+id/tv_info_title"
+                style="@style/Text.NotoSans.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="건빵이의 6월 활동을 알려드릴게요!"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_category_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tv_title_category_first, iv_title_category_arrow_first, iv_title_category_first" />
+
+            <ImageView
+                android:id="@+id/iv_title_category_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/ic_snack"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_info_title" />
+
+            <TextView
+                android:id="@+id/tv_title_category_first"
+                style="@style/Text.NotoSans.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_title_category_first"
+                app:layout_constraintStart_toEndOf="@+id/iv_title_category_first"
+                app:layout_constraintTop_toTopOf="@+id/iv_title_category_first" />
+
+            <ImageView
+                android:id="@+id/iv_title_category_arrow_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_arrow_up"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_title_category_first"
+                app:layout_constraintStart_toEndOf="@+id/tv_title_category_first"
+                app:layout_constraintTop_toTopOf="@+id/iv_title_category_first" />
+
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_category_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tv_title_category_second, iv_title_category_arrow_second, iv_title_category_second" />
+
+            <ImageView
+                android:id="@+id/iv_title_category_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/ic_water"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_title_category_arrow_first"
+                app:layout_constraintTop_toBottomOf="@+id/tv_info_title" />
+
+            <TextView
+                android:id="@+id/tv_title_category_second"
+                style="@style/Text.NotoSans.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_title_category_first"
+                app:layout_constraintStart_toEndOf="@+id/iv_title_category_second"
+                app:layout_constraintTop_toTopOf="@+id/iv_title_category_first" />
+
+            <ImageView
+                android:id="@+id/iv_title_category_arrow_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_arrow_up"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_title_category_first"
+                app:layout_constraintStart_toEndOf="@+id/tv_title_category_second"
+                app:layout_constraintTop_toTopOf="@+id/iv_title_category_first" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_category_third"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tv_title_category_third, iv_title_category_arrow_third, iv_title_category_third" />
+
+            <ImageView
+                android:id="@+id/iv_title_category_third"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/ic_drug"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_title_category_arrow_second"
+                app:layout_constraintTop_toBottomOf="@+id/tv_info_title" />
+
+            <TextView
+                android:id="@+id/tv_title_category_third"
+                style="@style/Text.NotoSans.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_title_category_first"
+                app:layout_constraintStart_toEndOf="@+id/iv_title_category_third"
+                app:layout_constraintTop_toTopOf="@+id/iv_title_category_first" />
+
+            <ImageView
+                android:id="@+id/iv_title_category_arrow_third"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_arrow_up"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_title_category_first"
+                app:layout_constraintStart_toEndOf="@+id/tv_title_category_third"
+                app:layout_constraintTop_toTopOf="@+id/iv_title_category_first" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
