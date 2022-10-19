@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View" />
+        <import type="androidx.lifecycle.LiveData" />
+
+        <variable
+            name="model"
+            type="com.example.pet_growth_journal.ui.total.TotalCategoryModel" />
+
+        <variable
+            name="actionListener"
+            type="com.example.pet_growth_journal.ui.total.OnClickTotalCategoryListener" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:onClick="@{() -> actionListener.onClickTotalCategory(model.id)}"
+    android:background="@{model.selected ? @drawable/background_total_category_select : @drawable/background_total_category_unselect}"
+    tools:background="@drawable/background_total_category_select">
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -76,11 +76,10 @@ enum class LayoutManagerType {
     Linear, Grid
 }
 
-@BindingAdapter("android:recycler_view_items", "android:layoutManagerType")
+@BindingAdapter("android:recycler_view_items")
 fun setRecyclerViewAdapterItems(
     recyclerView: RecyclerView,
     items: List<RecyclerItem>?,
-    layoutManager: LayoutManagerType?
 ) {
     var adapter = (recyclerView.adapter as? RecyclerViewAdapter)
     recyclerView.itemAnimator = null

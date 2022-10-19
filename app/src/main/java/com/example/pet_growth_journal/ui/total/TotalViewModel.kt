@@ -1,12 +1,35 @@
 package com.example.pet_growth_journal.ui.total
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.example.pet_growth_journal.BR
+import com.example.pet_growth_journal.R
 import com.example.pet_growth_journal.ui.dailygrow.Category
+import com.example.pet_growth_journal.util.RecyclerItem
+import com.example.pet_growth_journal.util.RecyclerItemComparator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class TotalViewModel @Inject constructor() : ViewModel() {
+class TotalViewModel @Inject constructor() : ViewModel(), OnClickTotalCategoryListener {
+    private val _totalCategorys = MutableLiveData<List<TotalCategoryModel>>()
+    val totalCategorys: LiveData<List<RecyclerItem>>
+        get() = Transformations.map(_totalCategorys) { model ->
+            model.map { categoryModel ->
+                TotalCategoryModel(
+                    categoryModel.id,
+                    categoryModel.category,
+                    false
+                ).toRecyclerItem(this)
+            }
+        }
+
+    override fun onClickTotalCategory(id: Int) {
+        Log.d("HWO", "onClickTotalCategory -> $id")
+    }
 
 }
 
@@ -23,6 +46,31 @@ data class MonthSummaryModel(
     val dailySummaryModel: List<DailySummaryModel>? = null
 )
 
+data class TotalCategoryModel(
+    val id: Int,
+    val category: String,
+    val isSelected: Boolean = false
+): RecyclerItemComparator {
+    override fun isSameContent(other: Any): Boolean {
+        return this == (other as TotalCategoryModel)
+    }
+
+    override fun isSameItem(other: Any): Boolean {
+        return false
+    }
+}
+
+fun TotalCategoryModel.toRecyclerItem(onClickTotalCategoryListener: OnClickTotalCategoryListener) = RecyclerItem(
+    BR.model to this,
+    listOf(
+        BR.actionListener to onClickTotalCategoryListener
+    ),
+    R.layout.item_total_category
+)
+
+interface OnClickTotalCategoryListener {
+    fun onClickTotalCategory(id: Int)
+}
 /** 하얀색 카드 */
 data class DailySummaryModel(
     val id: Int,
