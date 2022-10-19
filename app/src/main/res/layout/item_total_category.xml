@@ -16,14 +16,28 @@
             type="com.example.pet_growth_journal.ui.total.OnClickTotalCategoryListener" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_marginEnd="8dp"
     android:layout_height="wrap_content"
     android:onClick="@{() -> actionListener.onClickTotalCategory(model.id)}"
     android:background="@{model.selected ? @drawable/background_total_category_select : @drawable/background_total_category_unselect}"
     tools:background="@drawable/background_total_category_select">
-
-
-
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_category"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@{model.category}"
+        tools:text="전체"
+        style="@style/Text.NotoSans.Medium"
+        android:textSize="14sp"
+        android:textColor="@{model.selected ? @color/white : @color/black_21}" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
