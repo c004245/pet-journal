@@ -1,10 +1,7 @@
 package com.example.pet_growth_journal.ui.total
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.example.pet_growth_journal.BR
 import com.example.pet_growth_journal.R
 import com.example.pet_growth_journal.ui.dailygrow.Category
@@ -47,6 +44,11 @@ class TotalViewModel @Inject constructor() : ViewModel(), OnClickTotalCategoryLi
     }
     override fun onClickTotalCategory(id: Int) {
         Log.d("HWO", "onClickTotalCategory -> $id")
+
+        _totalCategorys.value = _totalCategorys.value.find {
+            it.isSelected == id
+        }
+        }
     }
 
 }
