@@ -29,7 +29,7 @@
             android:id="@+id/iv_thumbnail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:glideUrl="@{model.thumbnail}"
+            app:glideUrl="@{model.thumbnail}"
             tools:background="@drawable/item_daily_grow_dummy" />
 
 

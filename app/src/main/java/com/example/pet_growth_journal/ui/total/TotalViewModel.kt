@@ -22,11 +22,29 @@ class TotalViewModel @Inject constructor() : ViewModel(), OnClickTotalCategoryLi
                 TotalCategoryModel(
                     categoryModel.id,
                     categoryModel.category,
-                    false
+                    categoryModel.isSelected
                 ).toRecyclerItem(this)
             }
         }
 
+    init {
+        getTotalCategory()
+    }
+
+    fun getTotalCategory() {
+        _totalCategorys.value = listOf(
+            TotalCategoryModel(
+                id = 0,
+                category = "전체",
+                isSelected = true
+            ),
+            TotalCategoryModel(
+                id = 1,
+                category = "간식",
+                isSelected = false
+            )
+        )
+    }
     override fun onClickTotalCategory(id: Int) {
         Log.d("HWO", "onClickTotalCategory -> $id")
     }

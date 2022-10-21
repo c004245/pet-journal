@@ -1,5 +1,6 @@
 package com.example.pet_growth_journal.util
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -7,6 +8,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.*
+import com.google.api.Distribution.BucketOptions.Linear
 
 
 class RecyclerViewAdapter : ListAdapter<RecyclerItem, BindingViewHolder>(DiffCallback()) {
@@ -72,23 +74,25 @@ inline fun <reified T : Any> RecyclerItem.model(): T {
     return this.modelData.second as T
 }
 
-enum class LayoutManagerType {
-    Linear, Grid
+enum class RecyclerOrientationType {
+    VERTICAL, HORIZONTAL
 }
 
-@BindingAdapter("android:recycler_view_items")
+@BindingAdapter("android:recycler_view_items", "android:orientationType")
 fun setRecyclerViewAdapterItems(
     recyclerView: RecyclerView,
     items: List<RecyclerItem>?,
+    type: RecyclerOrientationType
+
 ) {
     var adapter = (recyclerView.adapter as? RecyclerViewAdapter)
     recyclerView.itemAnimator = null
-    recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
+    
+    recyclerView.layoutManager = LinearLayoutManager(recyclerView.context, if (type.name == "HORIZONTAL") LinearLayoutManager.HORIZONTAL else LinearLayoutManager.VERTICAL, false)
     if (adapter == null) {
         adapter = RecyclerViewAdapter()
         recyclerView.adapter = adapter
     }
-
     adapter.submitList(items.orEmpty())
 }
 

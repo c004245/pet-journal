@@ -9,6 +9,8 @@
 
         <import type="androidx.lifecycle.LiveData" />
 
+        <import type="com.example.pet_growth_journal.util.RecyclerOrientationType" />
+
         <variable
             name="viewModel"
             type="com.example.pet_growth_journal.ui.total.TotalViewModel" />
@@ -208,13 +210,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:recycler_view_items="@{viewModel.totalCategorys}"
+            android:orientationType="@{RecyclerOrientationType.HORIZONTAL}"
             app:layout_constraintTop_toBottomOf="@+id/cl_info"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_marginStart="16dp"
             android:clipToPadding="false"
-            android:orientation="horizontal"
             android:id="@+id/rv_category"
             tools:itemCount="6"
             tools:listitem="@layout/item_total_category"/>
