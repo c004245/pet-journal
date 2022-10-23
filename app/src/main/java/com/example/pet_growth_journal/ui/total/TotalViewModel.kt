@@ -45,9 +45,14 @@ class TotalViewModel @Inject constructor() : ViewModel(), OnClickTotalCategoryLi
     override fun onClickTotalCategory(id: Int) {
         Log.d("HWO", "onClickTotalCategory -> $id")
 
-        _totalCategorys.value = _totalCategorys.value.find {
-            it.isSelected == id
-        }
+        _totalCategorys.value = _totalCategorys.value?.map {
+            if (it.id == id) {
+                TotalCategoryModel(id, category = it.category, isSelected = !it.isSelected)
+            } else {
+                TotalCategoryModel(
+                    it.id, it.category, it.isSelected
+                )
+            }
         }
     }
 
