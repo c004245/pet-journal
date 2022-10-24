@@ -12,16 +12,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.pet_growth_journal.databinding.BottomsheetdialogAddFragmentBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class AddFragment : BottomSheetDialogFragment() {
 
-    private lateinit var addViewModel: AddViewModel
     private var _binding: BottomsheetdialogAddFragmentBinding? = null
     private val binding: BottomsheetdialogAddFragmentBinding
         get() = _binding!!
+
+    private val addViewModel: AddViewModel by viewModels()
+
 
     private val pickImageFromStorageResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == Activity.RESULT_OK) {
@@ -38,9 +41,6 @@ class AddFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        addViewModel =
-            ViewModelProvider(this)[AddViewModel::class.java]
-
         _binding = BottomsheetdialogAddFragmentBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = addViewModel
