@@ -1,24 +1,18 @@
 package com.example.pet_growth_journal.ui.add
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.CancellationSignal
 import android.provider.MediaStore
-import android.util.Log
 import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.example.pet_growth_journal.databinding.BottomsheetdialogAddFragmentBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -40,7 +34,7 @@ class AddFragment : BottomSheetDialogFragment() {
             viewModel = addViewModel
         }
 
-        addViewModel.pictureType.observe(this, Observer { type ->
+        addViewModel.pictureType.observe(this) { type ->
             when (type) {
                 PictureType.GALLERY -> {
                     pickFromGallery()
@@ -49,7 +43,7 @@ class AddFragment : BottomSheetDialogFragment() {
                     pickFromCamera()
                 }
             }
-        })
+        }
         return binding.root
     }
 
@@ -70,7 +64,6 @@ class AddFragment : BottomSheetDialogFragment() {
 
     private fun pickFromCamera() {
         cameraLauncher.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
-
     }
 
     private val cameraLauncher: ActivityResultLauncher<Intent> =

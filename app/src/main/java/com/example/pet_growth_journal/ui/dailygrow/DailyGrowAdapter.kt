@@ -1,6 +1,5 @@
 package com.example.pet_growth_journal.ui.dailygrow
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
