@@ -35,9 +35,10 @@
 
         <TextView
             android:id="@+id/tv_picture"
-            style="@style/Text.Pretendard.ExtraBold"
+            style="@style/Text.NotoSans.Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="48dp"
             android:text="@string/text_picture"
@@ -58,10 +59,11 @@
 
         <TextView
             android:id="@+id/tv_category"
-            style="@style/Text.Pretendard.ExtraBold"
+            style="@style/Text.NotoSans.Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:textSize="18sp"
             android:text="@string/text_category"
             android:textColor="@{viewModel.currentType == CurrentType.CATEGORY ? @color/black_21 : @color/gray_ad}"
             app:layout_constraintBottom_toBottomOf="@+id/tv_picture"
@@ -80,11 +82,12 @@
 
         <TextView
             android:id="@+id/tv_emotion"
-            style="@style/Text.Pretendard.ExtraBold"
+            style="@style/Text.NotoSans.Bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:text="@string/text_emotion"
+            android:textSize="18sp"
             android:textColor="@{viewModel.currentType == CurrentType.EMOTION ? @color/black_21 : @color/gray_ad}"
             app:layout_constraintBottom_toBottomOf="@+id/tv_picture"
             app:layout_constraintStart_toEndOf="@+id/iv_arrow_2"
@@ -105,6 +108,7 @@
 
 
             <ImageView
+                android:id="@+id/iv_select_picture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_gallery_gray"
@@ -119,6 +123,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginStart="16dp"
+            android:onClick="@{() -> viewModel.onClickCamera()}"
             android:background="@drawable/background_radius_8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/cl_gallery"
@@ -138,14 +143,13 @@
 
             <TextView
                 android:id="@+id/tv_picture_name"
-                style="@style/Text.Pretendard.ExtraBold"
+                style="@style/Text.NotoSans.Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:textSize="12sp"
                 android:text="@string/text_take_picture"
                 android:textColor="@color/black_21"
                 android:layout_marginStart="8dp"
-                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_picture"
@@ -158,6 +162,7 @@
             android:layout_height="56dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="8dp"
+            android:onClick="@{() -> viewModel.onClickGallery()}"
             android:background="@drawable/background_radius_8"
             app:layout_constraintStart_toEndOf="@+id/cl_camera"
             app:layout_constraintEnd_toEndOf="parent"
@@ -177,7 +182,7 @@
 
             <TextView
                 android:id="@+id/tv_gallery_name"
-                style="@style/Text.Pretendard.ExtraBold"
+                style="@style/Text.NotoSans.Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_choice_gallery"
@@ -194,8 +199,9 @@
             android:id="@+id/tv_no_picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Text.Pretendard.SemiBold"
+            style="@style/Text.NotoSans.Bold"
             android:text="@string/text_no_picture"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/gray_86"

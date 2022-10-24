@@ -2,8 +2,13 @@ package com.example.pet_growth_journal.ui.add
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.os.CancellationSignal
+import android.provider.MediaStore
+import android.util.Log
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,17 +30,6 @@ class AddFragment : BottomSheetDialogFragment() {
 
     private val addViewModel: AddViewModel by viewModels()
 
-
-    private val pickImageFromStorageResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == Activity.RESULT_OK) {
-            // 이미지 가져오기 성공
-            val uri = it.data?.data as Uri
-        }
-    }
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,18 +39,49 @@ class AddFragment : BottomSheetDialogFragment() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = addViewModel
         }
+
+        addViewModel.pictureType.observe(this, Observer { type ->
+            when (type) {
+                PictureType.GALLERY -> {
+                    pickFromGallery()
+                }
+                PictureType.CAMERA -> {
+                    pickFromCamera()
+                }
+            }
+        })
         return binding.root
     }
+
+    private fun pickFromGallery() {
+        val mimeType = arrayOf("image/jpeg", "image/png")
+        galleryLauncher.launch(Intent(Intent.ACTION_PICK).apply {
+            type = "image/*"
+            putExtra(Intent.EXTRA_MIME_TYPES, mimeType)
+        })
+    }
+
+    private val galleryLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            val thumbnail = context?.contentResolver?.loadThumbnail((it.data?.data ?: "") as Uri, Size(100, 100), CancellationSignal())
+            binding.ivSelectPicture.setImageBitmap(thumbnail)
+
+        }
+
+    private fun pickFromCamera() {
+        cameraLauncher.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
+
+    }
+
+    private val cameraLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            val bundle = it.data?.extras
+            val imageBitmap = bundle?.get("data") as Bitmap
+            binding.ivSelectPicture.setImageBitmap(imageBitmap)
+        }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun pickImageFromStorage() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        pickImageFromStorageResult.launch(intent)
     }
 }
