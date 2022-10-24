@@ -11,7 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class TotalViewModel @Inject constructor() : ViewModel(), OnClickTotalCategoryListener {
+class TotalViewModel @Inject constructor() : ViewModel(), OnClickTotalCategoryListener, OnClickTotalSummaryListener {
     private val _totalCategorys = MutableLiveData<List<TotalCategoryModel>>()
     val totalCategorys: LiveData<List<RecyclerItem>>
         get() = Transformations.map(_totalCategorys) { model ->
@@ -24,8 +24,23 @@ class TotalViewModel @Inject constructor() : ViewModel(), OnClickTotalCategoryLi
             }
         }
 
+    private val _totalSummarys = MutableLiveData<List<TotalSummaryModel>>()
+    val totalSummarys: LiveData<List<RecyclerItem>>
+        get() = Transformations.map(_totalSummarys) { model ->
+            model.map { summaryModel ->
+                TotalSummaryModel(
+                    summaryModel.id,
+                    summaryModel.category,
+                    summaryModel.title,
+                    summaryModel.date,
+                    summaryModel.thumbnail
+                ).toRecyclerItem(this)
+            }
+        }
+
     init {
         getTotalCategory()
+        getTotalSummary()
     }
 
     fun getTotalCategory() {
@@ -42,6 +57,95 @@ class TotalViewModel @Inject constructor() : ViewModel(), OnClickTotalCategoryLi
             )
         )
     }
+
+    fun getTotalSummary() {
+        _totalSummarys.value = listOf(
+            TotalSummaryModel(
+                id = 0,
+                category = Category.BATH,
+                title = "목욕",
+                date = "2022.06.01(일) 14:56",
+                thumbnail = ""
+            ),
+            TotalSummaryModel(
+                id = 1,
+                category = Category.BATH,
+                title = "밥",
+                date = "2022.06.01(일) 14:56",
+                thumbnail = ""
+            ),
+            TotalSummaryModel(
+                id = 2,
+                category = Category.BATH,
+                title = "병원",
+                date = "2022.06.01(일) 14:56",
+                thumbnail = ""
+            ),
+            TotalSummaryModel(
+                id = 3,
+                category = Category.BATH,
+                title = "목욕",
+                date = "2022.06.01(일) 14:56",
+                thumbnail = ""
+            ),
+            TotalSummaryModel(
+                id = 4,
+                category = Category.BATH,
+                title = "밥",
+                date = "2022.06.01(일) 14:56",
+                thumbnail = ""
+            ),
+            TotalSummaryModel(
+                id = 5,
+                category = Category.BATH,
+                title = "병원",
+                date = "2022.06.01(일) 14:56",
+                thumbnail = ""
+            ),
+            TotalSummaryModel(
+                id = 6,
+                category = Category.BATH,
+                title = "목욕",
+                date = "2022.06.01(일) 14:56",
+                thumbnail = ""
+            ),
+            TotalSummaryModel(
+                id = 7,
+                category = Category.BATH,
+                title = "밥",
+                date = "2022.06.01(일) 14:56",
+                thumbnail = ""
+            ),
+            TotalSummaryModel(
+                id = 8,
+                category = Category.BATH,
+                title = "병원",
+                date = "2022.06.01(일) 14:56",
+                thumbnail = ""
+            ),
+            TotalSummaryModel(
+                id = 9,
+                category = Category.BATH,
+                title = "목욕",
+                date = "2022.06.01(일) 14:56",
+                thumbnail = ""
+            ),
+            TotalSummaryModel(
+                id = 10,
+                category = Category.BATH,
+                title = "밥",
+                date = "2022.06.01(일) 14:56",
+                thumbnail = ""
+            ),
+            TotalSummaryModel(
+                id = 11,
+                category = Category.BATH,
+                title = "병원",
+                date = "2022.06.01(일) 14:56",
+                thumbnail = ""
+            ),
+        )
+    }
     override fun onClickTotalCategory(id: Int) {
         Log.d("HWO", "onClickTotalCategory -> $id")
 
@@ -54,6 +158,10 @@ class TotalViewModel @Inject constructor() : ViewModel(), OnClickTotalCategoryLi
                 )
             }
         }
+    }
+
+    override fun onClickTotalSummary(id: Int) {
+        Log.d("HWO", "onClickTotalSummary -> $id")
     }
 
 }
@@ -90,7 +198,7 @@ data class TotalSummaryModel(
     val id: Int,
     val category: Category,
     val title: String,
-    val time: String,
+    val date: String,
     val thumbnail: String? = null
 ): RecyclerItemComparator {
     override fun isSameContent(other: Any): Boolean {

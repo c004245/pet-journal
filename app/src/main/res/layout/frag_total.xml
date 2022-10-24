@@ -50,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:text="4월"
             app:layout_constraintBottom_toBottomOf="@+id/iv_previous_month"
             app:layout_constraintStart_toEndOf="@+id/iv_previous_month"
             app:layout_constraintTop_toTopOf="@+id/iv_previous_month"
@@ -220,5 +221,16 @@
             tools:itemCount="6"
             tools:listitem="@layout/item_total_category"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:recycler_view_items="@{viewModel.totalSummarys}"
+            android:orientationType="@{RecyclerOrientationType.VERTICAL}"
+            android:id="@+id/rv_summary"
+            app:layout_constraintTop_toBottomOf="@+id/rv_category"
+            android:layout_marginTop="16dp"
+            tools:listitem="@layout/item_total_summary"
+            android:clipToPadding="false"
+            tools:itemCount="6"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
