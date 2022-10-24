@@ -68,7 +68,7 @@ data class MonthSummaryModel(
     val month: Int,
     val name: String,
     val topCategory: CategoryModel,
-    val dailySummaryModel: List<DailySummaryModel>? = null
+    val dailySummaryModel: List<TotalSummaryModel>? = null
 )
 
 data class TotalCategoryModel(
@@ -85,6 +85,32 @@ data class TotalCategoryModel(
     }
 }
 
+/** 하얀색 카드 */
+data class TotalSummaryModel(
+    val id: Int,
+    val category: Category,
+    val title: String,
+    val time: String,
+    val thumbnail: String? = null
+): RecyclerItemComparator {
+    override fun isSameContent(other: Any): Boolean {
+        return this == (other as TotalSummaryModel)
+    }
+
+    override fun isSameItem(other: Any): Boolean {
+        return false
+    }
+}
+
+fun TotalSummaryModel.toRecyclerItem(onClickTotalSummaryListener: OnClickTotalSummaryListener) = RecyclerItem(
+    BR.model to this,
+    listOf(
+        BR.actionListener to onClickTotalSummaryListener
+    ),
+    R.layout.item_total_summary
+)
+
+
 fun TotalCategoryModel.toRecyclerItem(onClickTotalCategoryListener: OnClickTotalCategoryListener) = RecyclerItem(
     BR.model to this,
     listOf(
@@ -96,14 +122,10 @@ fun TotalCategoryModel.toRecyclerItem(onClickTotalCategoryListener: OnClickTotal
 interface OnClickTotalCategoryListener {
     fun onClickTotalCategory(id: Int)
 }
-/** 하얀색 카드 */
-data class DailySummaryModel(
-    val id: Int,
-    val category: Category,
-    val title: String,
-    val time: String
-)
 
+interface OnClickTotalSummaryListener {
+    fun onClickTotalSummary(id: Int)
+}
 
 data class CategoryModel(
     val id: Int,
