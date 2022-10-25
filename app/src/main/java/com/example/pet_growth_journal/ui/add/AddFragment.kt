@@ -44,6 +44,10 @@ class AddFragment : BottomSheetDialogFragment() {
                 }
             }
         }
+
+        binding.btnDummyPicture.setOnClickListener {
+            
+        }
         return binding.root
     }
 
@@ -59,6 +63,7 @@ class AddFragment : BottomSheetDialogFragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             val thumbnail = context?.contentResolver?.loadThumbnail((it.data?.data ?: "") as Uri, Size(100, 100), CancellationSignal())
             binding.ivSelectPicture.setImageBitmap(thumbnail)
+            binding.btnDummyPicture.visibility = View.VISIBLE
 
         }
 
@@ -71,6 +76,7 @@ class AddFragment : BottomSheetDialogFragment() {
             val bundle = it.data?.extras
             val imageBitmap = bundle?.get("data") as Bitmap
             binding.ivSelectPicture.setImageBitmap(imageBitmap)
+            binding.btnDummyPicture.visibility = View.VISIBLE
         }
 
     override fun onDestroyView() {
