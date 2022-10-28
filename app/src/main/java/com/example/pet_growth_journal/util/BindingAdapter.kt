@@ -19,3 +19,8 @@ fun setFontStyle(view: TextView, isSelected: Boolean) {
         view.setTextAppearance(R.style.Text_NotoSans_Medium)
     }
 }
+
+@BindingAdapter("app:categoryBackground")
+fun setCategoryBackground(view: ImageView, icon: Int) {
+    view.setImageResource(icon)
+}

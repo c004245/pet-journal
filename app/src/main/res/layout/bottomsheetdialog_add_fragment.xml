@@ -94,17 +94,18 @@
             app:layout_constraintTop_toTopOf="@+id/tv_picture" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_choice_view"
             android:layout_width="0dp"
             android:layout_height="278dp"
-            android:id="@+id/cl_choice_view"
-            app:layout_constraintBottom_toTopOf="@+id/cl_camera"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="24dp"
             android:layout_marginHorizontal="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/background_dotted_line"
+            app:layout_constraintBottom_toTopOf="@+id/cl_camera"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_picture"
-            android:background="@drawable/background_dotted_line" >
+            app:layout_constraintVertical_bias="0.0">
 
 
             <ImageView
@@ -112,10 +113,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_gallery_gray"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
