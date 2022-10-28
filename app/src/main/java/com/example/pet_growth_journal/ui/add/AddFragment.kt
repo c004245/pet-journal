@@ -46,7 +46,7 @@ class AddFragment : BottomSheetDialogFragment() {
         }
 
         binding.btnDummyPicture.setOnClickListener {
-            
+            addViewModel.setCurrentType(CurrentType.CATEGORY)
         }
         return binding.root
     }
@@ -84,3 +84,4 @@ class AddFragment : BottomSheetDialogFragment() {
         _binding = null
     }
 }
+
