@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <import type="androidx.lifecycle.LiveData" />
+
+        <import type="android.view.View" />
+
+        <import type="com.example.pet_growth_journal.ui.add.CurrentType" />
+
+        <variable
+            name="addType"
+            type="com.example.pet_growth_journal.ui.add.CurrentType" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/ic_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_picture"
+        style="@style/Text.NotoSans.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/text_picture"
+        android:textColor="@{currentType == CurrentType.PICTURE ? @color/black_21 : @color/gray_ad}"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/iv_arrow_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/ic_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_picture"
+        app:layout_constraintStart_toEndOf="@+id/tv_picture"
+        app:layout_constraintTop_toTopOf="@+id/tv_picture" />
+
+    <TextView
+        android:id="@+id/tv_category"
+        style="@style/Text.NotoSans.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textSize="18sp"
+        android:text="@string/text_category"
+        android:textColor="@{currentType == CurrentType.CATEGORY ? @color/black_21 : @color/gray_ad}"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_picture"
+        app:layout_constraintStart_toEndOf="@+id/iv_arrow_1"
+        app:layout_constraintTop_toTopOf="@+id/tv_picture" />
+
+    <ImageView
+        android:id="@+id/iv_arrow_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/ic_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_picture"
+        app:layout_constraintStart_toEndOf="@+id/tv_category"
+        app:layout_constraintTop_toTopOf="@+id/tv_picture" />
+
+    <TextView
+        android:id="@+id/tv_emotion"
+        style="@style/Text.NotoSans.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/text_emotion"
+        android:textSize="18sp"
+        android:textColor="@{currentType == CurrentType.EMOTION ? @color/black_21 : @color/gray_ad}"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_picture"
+        app:layout_constraintStart_toEndOf="@+id/iv_arrow_2"
+        app:layout_constraintTop_toTopOf="@+id/tv_picture" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -71,9 +71,9 @@
 
     <fragment
         android:id="@+id/navigation_add"
-        android:name="com.example.pet_growth_journal.ui.add.AddFragment"
+        android:name="com.example.pet_growth_journal.ui.add.AddPictureFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/bottomsheetdialog_add_fragment" />
+        tools:layout="@layout/bottomsheetdialog_add_picture_fragment" />
     <fragment
         android:id="@+id/navigation_total"
         android:name="com.example.pet_growth_journal.ui.total.TotalFragment"

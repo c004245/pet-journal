@@ -13,13 +13,13 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import com.example.pet_growth_journal.databinding.BottomsheetdialogAddFragmentBinding
+import com.example.pet_growth_journal.databinding.BottomsheetdialogAddPictureFragmentBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class AddFragment : BottomSheetDialogFragment() {
+class AddPictureFragment : BottomSheetDialogFragment() {
 
-    private var _binding: BottomsheetdialogAddFragmentBinding? = null
-    private val binding: BottomsheetdialogAddFragmentBinding
+    private var _binding: BottomsheetdialogAddPictureFragmentBinding? = null
+    private val binding: BottomsheetdialogAddPictureFragmentBinding
         get() = _binding!!
 
     private val addViewModel: AddViewModel by viewModels()
@@ -29,7 +29,7 @@ class AddFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = BottomsheetdialogAddFragmentBinding.inflate(inflater, container, false).apply {
+        _binding = BottomsheetdialogAddPictureFragmentBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = addViewModel
         }
