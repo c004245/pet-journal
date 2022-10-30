@@ -4,5 +4,5 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class AddCategoryFragment: BottomSheetDialogFragment() {
 
-    private v
+
 }

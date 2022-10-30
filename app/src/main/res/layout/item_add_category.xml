@@ -18,7 +18,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@{model.selected ? @drawable/background_radius_16_add_category_select : @drawable/background_radius_16_add_category_unselect"
+        android:background="@{model.selected ? @drawable/background_radius_16_add_category_select : @drawable/background_radius_16_add_category_unselect}"
         android:onClick="@{() -> actionListener.onClickAddCategory(model.id)}"
         tools:background="@drawable/background_radius_16_add_category_select">
 
@@ -47,11 +47,7 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_add_category"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="12dp"
-            android:textColor="@{model.selected ? @color/white : @color/black21}" />
-
-
-
-
+            android:textColor="@{model.selected ? @color/white : @color/black_21}" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

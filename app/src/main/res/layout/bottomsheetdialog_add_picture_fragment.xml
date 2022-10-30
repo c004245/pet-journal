@@ -10,7 +10,6 @@
 
         <import type="androidx.lifecycle.LiveData" />
 
-        <import type="com.example.pet_growth_journal.ui.add.CurrentType" />
 
         <variable
             name="viewModel"
@@ -28,7 +27,7 @@
         <include
             android:id="@+id/add_appbar"
             layout="@layout/bottomsheetdialog_add_appbar"
-            bind:addType="@{viewModel.currentType}" />
+            bind:currentType="@{viewModel.currentType}" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
