@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import com.example.pet_growth_journal.R
 import com.example.pet_growth_journal.databinding.FragLoginBinding
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
@@ -70,6 +72,7 @@ class LoginFragment: Fragment() {
                     }
                 } else if (token != null) {
                     Log.d("HWO", "login success --> ${token.accessToken} -- ${token.refreshToken}")
+                    Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_registerNameFragment)
                 }
             }
             if (LoginClient.instance.isKakaoTalkLoginAvailable(requireContext())) {
