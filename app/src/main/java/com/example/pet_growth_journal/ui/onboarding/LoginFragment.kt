@@ -1,4 +1,4 @@
-package com.example.pet_growth_journal.ui
+package com.example.pet_growth_journal.ui.onboarding
 
 import android.os.Bundle
 import android.util.Log
