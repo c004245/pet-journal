@@ -15,7 +15,9 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.example.pet_growth_journal.ui.customeview.CustomBottomNavigationView
 import com.example.pet_growth_journal.util.DestinationChangeObserver
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -37,9 +39,9 @@ class MainActivity : AppCompatActivity() {
                 MainApplication.currentDirection = destination
             }
 
-        lifecycle.addObserver(
-            DestinationChangeObserver(callback, findNavController(R.id.nav_host_fragment_activity_main))
-        )
+//        currentDirectionlifecycle.addObserver(
+//            DestinationChangeObserver(callback, findNavController(R.id.nav_host_fragment_activity_main))
+
     }
 
 //
