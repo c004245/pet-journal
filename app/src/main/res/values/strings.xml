@@ -15,4 +15,7 @@
     <string name="text_no_record">오늘의 기록이 없어요.</string>
     <string name="text_title_today_grow">오늘의 성장</string>
     <string name="text_total_view">토탈 뷰</string>
+    <string name="text_login_title">반려견의 성장을 기록해요</string>
+    <string name="text_login_description">산책, 급여, 배변 등 반려견의 성장을 기록해요.</string>
+    <string name="text_start_kakao">카카오로 시작하기</string>
 </resources>
