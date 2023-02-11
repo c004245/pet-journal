@@ -38,7 +38,12 @@ class RegisterPictureFragment: Fragment() {
                 Navigation.findNavController(binding.root).navigate(R.id.action_registerNameFragment_to_registerMoreFragment)
             }
         }
+
+        binding.ivBack.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.action_registerPictureFragment_to_registerMoreFragment)
+        }
         return binding.root
+
     }
 
     override fun onDestroyView() {
