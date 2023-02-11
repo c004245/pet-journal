@@ -12,12 +12,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.pet_growth_journal.R
 import com.example.pet_growth_journal.databinding.FragRegisterNameBinding
+import com.example.pet_growth_journal.databinding.FragRegisterPictureBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterPictureFragment: Fragment() {
 
-    private var _binding: FragRegisterNameBinding? = null
+    private var _binding: FragRegisterPictureBinding? = null
     private val binding get() = _binding!!
 
     private val registerViewModel: RegisterViewModel by viewModels()
@@ -27,16 +28,11 @@ class RegisterPictureFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragRegisterNameBinding.inflate(inflater, container, false).apply {
+        _binding = FragRegisterPictureBinding.inflate(inflater, container, false).apply {
             viewModel = registerViewModel
             lifecycleOwner = viewLifecycleOwner
         }
-
-
-        binding.etName.addTextChangedListener {
-            registerViewModel.setNameState(it.toString())
-        }
-
+        
         binding.btnNext.setOnClickListener {
             if (registerViewModel.nameEnable.value == true) {
                 Navigation.findNavController(binding.root).navigate(R.id.action_registerNameFragment_to_registerMoreFragment)
