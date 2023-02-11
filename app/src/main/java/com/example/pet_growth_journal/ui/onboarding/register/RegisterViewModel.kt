@@ -15,7 +15,27 @@ class RegisterViewModel @Inject constructor(
     private var _nameEnable = MutableLiveData(false)
     val nameEnable: LiveData<Boolean>
         get() = _nameEnable
+
+    private var _moreEnable = MutableLiveData(false)
+    val moreEnable: LiveData<Boolean>
+        get() = _moreEnable
+
+    private var _genderType = MutableLiveData(PetGender.NONE)
+    val genderType: LiveData<PetGender>
+        get() = _genderType
+
     fun setNameState(name: String) {
         _nameEnable.value = name.isNotEmpty()
     }
+    fun setMoreState(isEnable: Boolean) {
+        _moreEnable.value = isEnable
+    }
+
+    fun clickGender(gender: PetGender) {
+        _genderType.value = gender
+    }
+}
+
+enum class PetGender {
+    NONE, MALE, FEMALE
 }

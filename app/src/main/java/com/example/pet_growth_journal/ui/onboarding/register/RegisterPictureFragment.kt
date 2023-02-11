@@ -15,7 +15,7 @@ import com.example.pet_growth_journal.databinding.FragRegisterNameBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterNameFragment: Fragment() {
+class RegisterPictureFragment: Fragment() {
 
     private var _binding: FragRegisterNameBinding? = null
     private val binding get() = _binding!!

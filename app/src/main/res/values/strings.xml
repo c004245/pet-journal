@@ -21,7 +21,13 @@
 
     <string name="social_kakao_app_key">kakao42cb5a001e4aad8458c0b26f5e582da7</string>
     <string name="text_pet_name_description">반려견의 이름을\n알려주세요.</string>
+    <string name="text_pet_more_description">반려견의 정보를\n조금 더 알려주세요.</string>
     <string name="text_pet_name">반려견 이름</string>
     <string name="text_next">다음</string>
+    <string name="text_gender_male">남아</string>
+    <string name="text_female">여아</string>
+
+    <string name="text_pet_type">견종</string>
+    <string name="text_pet_birth">생년월일</string>
 
 </resources>
