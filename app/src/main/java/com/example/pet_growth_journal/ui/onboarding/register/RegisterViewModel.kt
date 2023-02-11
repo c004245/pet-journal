@@ -20,6 +20,10 @@ class RegisterViewModel @Inject constructor(
     val moreEnable: LiveData<Boolean>
         get() = _moreEnable
 
+    private var _pictureEnable = MutableLiveData(false)
+    val pictureEnable: LiveData<Boolean>
+        get() = _pictureEnable
+
     private var _genderType = MutableLiveData(PetGender.NONE)
     val genderType: LiveData<PetGender>
         get() = _genderType

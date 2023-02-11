@@ -43,13 +43,13 @@
 
         <action
             android:id="@+id/action_registerMoreFragment_to_registerPictureFragment"
-            app:destination="@+id/navigation_register_more" />
+            app:destination="@+id/navigation_register_picture" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_register_picture"
         android:name="com.example.pet_growth_journal.ui.onboarding.register.RegisterPictureFragment"
-        tools:layout="@layout/frag_register_name">
+        tools:layout="@layout/frag_register_picture">
 
     </fragment>
 </navigation>

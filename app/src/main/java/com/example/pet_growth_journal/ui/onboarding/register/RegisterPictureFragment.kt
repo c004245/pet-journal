@@ -32,7 +32,7 @@ class RegisterPictureFragment: Fragment() {
             viewModel = registerViewModel
             lifecycleOwner = viewLifecycleOwner
         }
-        
+
         binding.btnNext.setOnClickListener {
             if (registerViewModel.nameEnable.value == true) {
                 Navigation.findNavController(binding.root).navigate(R.id.action_registerNameFragment_to_registerMoreFragment)
