@@ -42,6 +42,9 @@ class RegisterNameFragment: Fragment() {
                 Navigation.findNavController(binding.root).navigate(R.id.action_registerNameFragment_to_registerMoreFragment)
             }
         }
+        binding.ivBack.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.action_registerNameFragment_to_loginFragment)
+        }
         return binding.root
     }
 

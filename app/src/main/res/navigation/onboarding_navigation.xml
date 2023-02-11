@@ -34,6 +34,10 @@
         <action
             android:id="@+id/action_registerNameFragment_to_registerMoreFragment"
             app:destination="@+id/navigation_register_more" />
+
+        <action
+            android:id="@+id/action_registerNameFragment_to_loginFragment"
+            app:destination="@+id/navigation_login"/>
     </fragment>
 
     <fragment
@@ -43,13 +47,21 @@
 
         <action
             android:id="@+id/action_registerMoreFragment_to_registerPictureFragment"
-            app:destination="@+id/navigation_register_more" />
+            app:destination="@+id/navigation_register_picture" />
+
+        <action
+            android:id="@+id/action_registerMoreFragment_to_registerNameFragment"
+            app:destination="@+id/navigation_register_name"/>
     </fragment>
 
     <fragment
         android:id="@+id/navigation_register_picture"
         android:name="com.example.pet_growth_journal.ui.onboarding.register.RegisterPictureFragment"
-        tools:layout="@layout/frag_register_name">
+        tools:layout="@layout/frag_register_picture">
+
+        <action
+            android:id="@+id/action_registerPictureFragment_to_registerMoreFragment"
+            app:destination="@+id/navigation_register_more" />
 
     </fragment>
 </navigation>
