@@ -25,6 +25,7 @@ class DailyGrowAdapter: ListAdapter<DailyGrowModel, DailyGrowAdapter.DailyGrowVi
         holder.bind(getItem(position))
     }
 
+
 }
 
 private class DailyGrowDiffCallback: DiffUtil.ItemCallback<DailyGrowModel>() {
