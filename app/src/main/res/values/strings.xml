@@ -11,7 +11,7 @@
     <string name="text_no_picture">사진 넣지 않기</string>
 
     <string name="text_today_grow_nav">오늘의 성장</string>
-    <string name="text_total_nav">토탈 뷰</string>
+    <string name="text_total_nav">모아보기</string>
     <string name="text_no_record">오늘의 기록이 없어요.</string>
     <string name="text_title_today_grow">오늘의 성장</string>
     <string name="text_total_view">토탈 뷰</string>
@@ -32,5 +32,6 @@
     <string name="text_pet_type">견종</string>
     <string name="text_pet_birth">생년월일</string>
     <string name="text_add_picture">사진 추가</string>
+
 
 </resources>

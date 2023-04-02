@@ -1,93 +1,45 @@
 package com.example.pet_growth_journal
 
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.pet_growth_journal.databinding.ActivityMainBinding
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.FirebaseMessaging
-import com.example.pet_growth_journal.ui.customeview.CustomBottomNavigationView
-import com.example.pet_growth_journal.util.DestinationChangeObserver
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-
+class MainActivity: AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        checkFcmToken()
-        checkFirestore()
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater).apply {
+            viewModel = mainViewModel
+            lifecycleOwner = this@MainActivity
+        }
         setContentView(binding.root)
 
+        window.statusBarColor = Color.TRANSPARENT
+
+        initObserver()
     }
 
-    private fun setupDestinationChangeObserver() {
-        val callback =
-            NavController.OnDestinationChangedListener { controller, destination, arguments ->
-                MainApplication.currentFragment = destination.label.toString()
-                MainApplication.currentDirection = destination
-            }
-
-//        currentDirectionlifecycle.addObserver(
-//            DestinationChangeObserver(callback, findNavController(R.id.nav_host_fragment_activity_main))
-
-    }
-
-//
-//        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-//        val appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.navigation_daily_grow, R.id.navigation_add, R.id.navigation_total
-//            )
-//        )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-//        navView.setupWithNavController(navController)
-//
-//        setClickListener()
-
-
-    private fun setOnClickListener() {
-//        binding.btnAddRecord.setOnClickListener {
-//            findNavController(R.id.nav_host_fragment_activity_main).navigate(
-//
-//            )
-//        }
-    }
-
-    private fun checkFcmToken() {
-        FirebaseMessaging.getInstance().token.addOnSuccessListener {  fcmToken ->
-            Log.d("HWO", "token value -> $fcmToken")
+    private fun initObserver() {
+        mainViewModel.currentView.observe(this) { viewMode ->
+            val navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.nav_host_fragment_main) as NavHostFragment
+            navHostFragment.navController.navigate(viewMode.navigationId)
         }
     }
 
-    private fun checkFirestore() {
-        val db = Firebase.firestore
+}
 
-        val user = hashMapOf(
-            "category" to "산책",
-            "emotion" to "좋음",
-            "pet" to "건빵",
-            "id" to 1111
-        )
+enum class MainViewMode(val navigationId: Int) {
+    DAILY(R.id.navigation_daily_grow),
+    ADD(R.id.navigation_add),
+    TOTAL(R.id.navigation_total);
 
-        db.collection("record")
-            .add(user)
-            .addOnSuccessListener { documentReference ->
-                Log.d("HWO", "DocumentSnapshot -> ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.d("HWO", "Error adding document", e)
-            }
-    }
 }

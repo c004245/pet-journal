@@ -49,6 +49,8 @@ class DailyGrowFragment : Fragment() {
             }
             adapter = dailyGrowAdapter
         }
+
+
     }
 
     override fun onDestroyView() {
