@@ -33,13 +33,17 @@ class MainActivity: AppCompatActivity() {
                 supportFragmentManager.findFragmentById(R.id.nav_host_fragment_main) as NavHostFragment
             navHostFragment.navController.navigate(viewMode.navigationId)
         }
+
+        mainViewModel.showAddPopup.observe(this) {
+
+        }
     }
 
 }
 
 enum class MainViewMode(val navigationId: Int) {
     DAILY(R.id.navigation_daily_grow),
-    ADD(R.id.navigation_add),
+//    ADD(R.id.navigation_add),
     TOTAL(R.id.navigation_total);
 
 }

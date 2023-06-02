@@ -39,17 +39,17 @@ class DailyGrowFragment : Fragment() {
     }
 
     private fun initViewPager() {
-        binding.vpGrowRecord.run {
-            offscreenPageLimit = 1
-            addItemDecoration(object : RecyclerView.ItemDecoration() {
-
-            })
-            setPageTransformer { page, position ->
-
-            }
-            adapter = dailyGrowAdapter
-        }
-
+//        binding.vpGrowRecord.run {
+//            offscreenPageLimit = 1
+//            addItemDecoration(object : RecyclerView.ItemDecoration() {
+//
+//            })
+//            setPageTransformer { page, position ->
+//
+//            }
+//            adapter = dailyGrowAdapter
+//        }
+//
 
     }
 

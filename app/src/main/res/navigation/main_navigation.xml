@@ -12,11 +12,11 @@
         android:label="@string/title_home"
         tools:layout="@layout/frag_daily_grow" />
 
-    <fragment
-        android:id="@+id/navigation_add"
-        android:name="com.example.pet_growth_journal.ui.add.AddPictureFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/bottomsheetdialog_add_picture_fragment" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_add"-->
+<!--        android:name="com.example.pet_growth_journal.ui.add.AddPictureFragment"-->
+<!--        android:label="@string/title_notifications"-->
+<!--        tools:layout="@layout/bottomsheetdialog_add_picture_fragment" />-->
 
     <fragment
         android:id="@+id/navigation_total"

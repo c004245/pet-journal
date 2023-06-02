@@ -38,21 +38,21 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:layout_width="0dp"
-            android:layout_marginHorizontal="40dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginVertical="115dp"
-            android:id="@+id/vp_grow_record"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:foregroundGravity="center"
-            android:visibility="@{viewModel.isTodayRecord ? View.VISIBLE : View.GONE}"
-            android:overScrollMode="never" />
+<!--        <androidx.viewpager2.widget.ViewPager2-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_marginHorizontal="40dp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            android:layout_marginVertical="115dp"-->
+<!--            android:id="@+id/vp_grow_record"-->
+<!--            android:clipChildren="false"-->
+<!--            android:clipToPadding="false"-->
+<!--            android:foregroundGravity="center"-->
+<!--            android:visibility="@{viewModel.isTodayRecord ? View.VISIBLE : View.GONE}"-->
+<!--            android:overScrollMode="never" />-->
 
 
         <androidx.constraintlayout.widget.ConstraintLayout

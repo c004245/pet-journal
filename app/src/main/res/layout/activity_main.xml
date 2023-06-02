@@ -71,7 +71,7 @@
             <ImageButton
                 android:id="@+id/iv_add"
                 android:layout_width="wrap_content"
-                android:onClick="@{() -> viewModel.setCurrentView(MainViewMode.ADD)}"
+                android:onClick="@{() -> viewModel.showAddPopup()}"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_fab_add"
                 app:layout_constraintBottom_toBottomOf="parent"
