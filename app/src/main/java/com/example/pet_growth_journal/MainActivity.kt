@@ -2,15 +2,22 @@ package com.example.pet_growth_journal
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.example.pet_growth_journal.databinding.ActivityMainBinding
+import com.example.pet_growth_journal.result.EventObserver
+import com.example.pet_growth_journal.ui.add.AddPopup
+import com.example.pet_growth_journal.ui.common.DialogPopupFragmentManager
+import com.example.pet_growth_journal.ui.common.PopupName
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity: AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var addPopup: AddPopup
     private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,9 +42,30 @@ class MainActivity: AppCompatActivity() {
         }
 
         mainViewModel.showAddPopup.observe(this) {
+            if (!::addPopup.isInitialized) {
+                addPopup = AddPopup(mainViewModel)
+            }
 
+            addPopup.startPopup(
+                R.id.fl_main_activity_popup,
+                DialogPopupFragmentManager(supportFragmentManager)
+            )
+
+            binding.flMainActivityPopup.visibility = View.VISIBLE
         }
+
+        mainViewModel.closePopup.observe(this, EventObserver {
+            when (it) {
+                PopupName.ADD -> {
+                    if (::addPopup.isInitialized) {
+                        addPopup.closePopup()
+                    }
+                }
+            }
+            binding.flMainActivityPopup.visibility = View.GONE
+        })
     }
+
 
 }
 

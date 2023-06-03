@@ -16,11 +16,13 @@ import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.pet_growth_journal.R
-import com.example.pet_growth_journal.databinding.BottomsheetdialogAddPictureFragmentBinding
+import com.example.pet_growth_journal.databinding.CommonAddBottomPopupBinding
 import com.example.pet_growth_journal.ui.common.BottomDialogPopupFragment
+import com.example.pet_growth_journal.ui.common.PopupController
 import com.example.pet_growth_journal.ui.common.PopupTransactionProvider
 import com.example.pet_growth_journal.ui.common.ViewModelPopupController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.lang.IllegalStateException
 
 class AddPopup(
     private val viewModelPopupController: ViewModelPopupController
@@ -47,7 +49,28 @@ class AddPopup(
 class AddPopupFragment(
     private val viewModelPopupController: ViewModelPopupController
 ): Fragment() {
-    lateinit var binding:
+    lateinit var binding: CommonAddBottomPopupBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val addPopupController =
+            viewModelPopupController.usePopupControllerList.find { it is AddPopupController }
+        if (addPopupController !is AddPopupController) throw IllegalStateException(
+            "ViewModelPopupController not has AddPopupController"
+        )
+
+        binding = CommonAddBottomPopupBinding.inflate(inflater, container, false)
+            .apply {
+                lifecycleOwner = viewLifecycleOwner
+                controller = addPopupController
+                popupController = viewModelPopupController
+            }
+
+        return binding.root
+    }
 
 //    private val addViewModel: AddViewModel by viewModels()
 //
@@ -112,3 +135,10 @@ class AddPopupFragment(
 //    }
 }
 
+class AddPopupDelegate: AddPopupController {
+
+}
+
+interface AddPopupController: PopupController {
+
+}
