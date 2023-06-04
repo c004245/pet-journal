@@ -12,9 +12,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.pet_growth_journal.MainViewModel
 import com.example.pet_growth_journal.R
 import com.example.pet_growth_journal.databinding.CommonAddBottomPopupBinding
 import com.example.pet_growth_journal.ui.common.BottomDialogPopupFragment
@@ -62,6 +66,8 @@ class AddPopupFragment(
             "ViewModelPopupController not has AddPopupController"
         )
 
+
+
         binding = CommonAddBottomPopupBinding.inflate(inflater, container, false)
             .apply {
                 lifecycleOwner = viewLifecycleOwner
@@ -69,8 +75,55 @@ class AddPopupFragment(
                 popupController = viewModelPopupController
             }
 
+        addPopupController.setCurrentType(CurrentType.PICTURE)
+
+        initObserver(addPopupController)
+
+
         return binding.root
     }
+
+    private fun initObserver(addPopupController: AddPopupController) {
+
+
+        addPopupController.pictureType.observe(viewLifecycleOwner) { type ->
+            when (type) {
+                PictureType.GALLERY -> {
+                    pickFromGallery()
+                }
+                PictureType.CAMERA -> {
+                    pickFromCamera()
+                }
+            }
+
+        }
+    }
+        private fun pickFromGallery() {
+        val mimeType = arrayOf("image/jpeg", "image/png")
+        galleryLauncher.launch(Intent(Intent.ACTION_PICK).apply {
+            type = "image/*"
+            putExtra(Intent.EXTRA_MIME_TYPES, mimeType)
+        })
+    }
+
+    private val galleryLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            val thumbnail = context?.contentResolver?.loadThumbnail((it.data?.data ?: "") as Uri, Size(100, 100), CancellationSignal())
+            binding.ivSelectPicture.setImageBitmap(thumbnail)
+
+        }
+
+    private fun pickFromCamera() {
+        cameraLauncher.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
+    }
+
+    private val cameraLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            val bundle = it.data?.extras
+            val imageBitmap = bundle?.get("data") as Bitmap
+            binding.ivSelectPicture.setImageBitmap(imageBitmap)
+        }
+
 
 //    private val addViewModel: AddViewModel by viewModels()
 //
@@ -136,9 +189,36 @@ class AddPopupFragment(
 }
 
 class AddPopupDelegate: AddPopupController {
+    private val _currentType: MutableLiveData<CurrentType> = MutableLiveData()
+    override val currentType: LiveData<CurrentType>
+        get() = _currentType
+
+    private val _pictureType: MutableLiveData<PictureType> = MutableLiveData()
+    override val pictureType: LiveData<PictureType>
+        get() = _pictureType
+
+    override fun setCurrentType(type: CurrentType) {
+        _currentType.value = type
+    }
+
+    override fun onClickCamera() {
+        _pictureType.value = PictureType.CAMERA
+
+
+    }
+
+    override fun onClickGallery() {
+        _pictureType.value = PictureType.GALLERY
+    }
 
 }
 
 interface AddPopupController: PopupController {
+    fun setCurrentType(type: CurrentType)
+    val currentType: LiveData<CurrentType>
+    fun onClickGallery()
+    fun onClickCamera()
+
+    val pictureType: LiveData<PictureType>
 
 }

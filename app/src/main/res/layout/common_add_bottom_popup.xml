@@ -27,6 +27,135 @@
         android:layout_height="wrap_content"
         tools:context=".ui.add.AddPopup">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fl_popup"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+
+                    <include
+                        android:id="@+id/add_appbar"
+                        bind:currentType="@{controller.currentType}"
+                        layout="@layout/bottomsheetdialog_add_appbar" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_choice_view"
+                        android:layout_width="0dp"
+                        android:layout_height="278dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/background_dotted_line"
+                        app:layout_constraintBottom_toTopOf="@+id/cl_camera"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/add_appbar"
+                        >
+
+
+                        <ImageView
+                            android:id="@+id/iv_select_picture"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_gallery_gray"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_camera"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:onClick="@{() -> controller.onClickCamera()}"
+                        android:layout_marginStart="16dp"
+                        android:background="@drawable/background_radius_8"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/cl_gallery"
+                        android:layout_marginBottom="24dp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_no_picture">
+
+                        <ImageView
+                            android:id="@+id/iv_picture"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_camera_outline"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_picture_name"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_picture_name"
+                            style="@style/Text.NotoSans.Bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:text="@string/text_take_picture"
+                            android:textColor="@color/black_21"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/iv_picture"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_gallery"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:onClick="@{() -> controller.onClickGallery()}"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/background_radius_8"
+                        app:layout_constraintStart_toEndOf="@+id/cl_camera"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginBottom="24dp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_no_picture">
+
+                        <ImageView
+                            android:id="@+id/iv_gallery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_gallery"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_gallery_name"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_gallery_name"
+                            style="@style/Text.NotoSans.Bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_choice_gallery"
+                            android:textColor="@color/black_21"
+                            android:layout_marginStart="8dp"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/iv_gallery"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/tv_no_picture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/Text.NotoSans.Bold"
+                        android:text="@string/text_no_picture"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textColor="@color/gray_86"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="24dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 <!--        <include-->
 <!--            android:id="@+id/add_appbar"-->
