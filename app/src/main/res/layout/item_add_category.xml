@@ -7,19 +7,12 @@
         <import type="android.view.View" />
         <import type="androidx.lifecycle.LiveData" />
 
-        <variable
-            name="model"
-            type="com.example.pet_growth_journal.ui.add.AddCategoryModel" />
 
-        <variable
-            name="actionListener"
-            type="com.example.pet_growth_journal.ui.add.OnClickAddCategoryListener" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cl_category"
-        android:onClick="@{() -> actionListener.onClickAddCategory(model.id)}"
         tools:background="@drawable/background_radius_16_add_category_select">
 
         <ImageView

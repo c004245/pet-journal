@@ -15,28 +15,29 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.pet_growth_journal.R
 import com.example.pet_growth_journal.databinding.ItemAddCategoryBinding
 
 class AddCategoryAdapter(
     private val context: Context,
-    private val lifecycleOwner: LifecycleOwner
-): ListAdapter<AddCategoryModel, AddCategoryCommonListViewHolder>(
+    val onClickCategory: (category: AddCategoryModel) -> Unit
+): ListAdapter<AddCategoryModel, AddCategoryAdapter.AddCategoryViewHolder>(
     ItemDiffCallback()
 ) {
+
+    class AddCategoryViewHolder(val binding: ItemAddCategoryBinding): ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): AddCategoryCommonListViewHolder {
+    ): AddCategoryViewHolder {
+
         val binding: ItemAddCategoryBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(context),
-            R.layout.item_add_category,
-            parent, false)
+            LayoutInflater.from(context), R.layout.item_add_category, parent, false
+        )
 
-
-        binding.lifecycleOwner = lifecycleOwner
         val layoutParams = binding.root.layoutParams as GridLayoutManager.LayoutParams
 
         val displayMetrics = DisplayMetrics()
@@ -48,12 +49,33 @@ class AddCategoryAdapter(
         layoutParams.setMargins(px)
         binding.root.layoutParams = layoutParams
 
-        return AddCategoryListViewHolder(binding)
+
+        return AddCategoryViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: AddCategoryCommonListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AddCategoryViewHolder, position: Int) {
         val item = getItem(position) ?: return
-        holder.bind(item, context)
+        holder.run {
+            if (item.isSelected) {
+                binding.clCategory.background =
+                    AppCompatResources.getDrawable(context, R.drawable.background_radius_16_add_category_select)
+
+                binding.tvCategory.setTextColor(context.resources.getColor(R.color.white))
+                binding.ivAddCategory.setImageResource(item.selectIcon)
+            } else {
+                binding.clCategory.background =
+                    AppCompatResources.getDrawable(context, R.drawable.background_radius_16_add_category_unselect)
+                binding.tvCategory.setTextColor(context.resources.getColor(R.color.black_21))
+                binding.ivAddCategory.setImageResource(item.icon)
+            }
+
+            binding.tvCategory.text = item.category
+            binding.root.setOnClickListener {
+                Log.d("HWO", "onClick")
+                onClickCategory(item)
+            }
+        }
+
     }
     class ItemDiffCallback: DiffUtil.ItemCallback<AddCategoryModel>() {
         override fun areContentsTheSame(
@@ -71,32 +93,6 @@ class AddCategoryAdapter(
         }
 
 
-    }
-}
-
-
-abstract class AddCategoryCommonListViewHolder(view: View) : ViewHolder(view) {
-    abstract fun bind(item: AddCategoryModel, context: Context)
-}
-
-class AddCategoryListViewHolder(val binding: ItemAddCategoryBinding): AddCategoryCommonListViewHolder(binding.root) {
-    override fun bind(item: AddCategoryModel, context: Context) {
-        if (item.isSelected) {
-            binding.clCategory.background =
-                AppCompatResources.getDrawable(context, R.drawable.background_radius_16_add_category_select)
-
-            binding.tvCategory.setTextColor(context.resources.getColor(R.color.white))
-            binding.ivAddCategory.setImageResource(item.selectIcon)
-
-//            binding.tvCategory.settextcolor
-        } else {
-            binding.clCategory.background =
-                AppCompatResources.getDrawable(context, R.drawable.background_radius_16_add_category_unselect)
-            binding.tvCategory.setTextColor(context.resources.getColor(R.color.black_21))
-            binding.ivAddCategory.setImageResource(item.icon)
-        }
-
-        binding.tvCategory.text = item.category
     }
 }
 

@@ -60,6 +60,12 @@ class AddPopupFragment(
 
         private val addViewModel: AddViewModel by viewModels()
 
+    private val addCategoryAdapter by lazy {
+        AddCategoryAdapter(requireContext(), onClickCategory = { category ->
+            Log.d("HWO", "addcategory click -> $category")
+
+        },)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,8 +92,8 @@ class AddPopupFragment(
 
         initObserver(addPopupController)
 
-        val adapter = AddCategoryAdapter(requireContext(), this)
-        binding.rvCategory.adapter = adapter
+
+        binding.rvCategory.adapter = addCategoryAdapter
 
         val layoutManager = GridLayoutManager(context, 4)
         binding.rvCategory.layoutManager = layoutManager
@@ -99,7 +105,7 @@ class AddPopupFragment(
 
         addViewModel.addCategorys.observe(viewLifecycleOwner) {
             Log.d("HWO", "Addcategorys --> $it")
-            adapter.submitList(it)
+            addCategoryAdapter.submitList(it)
         }
 
         return binding.root

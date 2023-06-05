@@ -1,6 +1,7 @@
 package com.example.pet_growth_journal.ui.add
 
 import android.graphics.drawable.Drawable
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -13,9 +14,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AddViewModel @Inject constructor(): ViewModel(), OnClickAddCategoryListener {
+class AddViewModel @Inject constructor(): ViewModel(){
 
-    private var _currentType = MutableLiveData<CurrentType>(CurrentType.PICTURE)
+    private var _currentType = MutableLiveData(CurrentType.PICTURE)
     val currentType: LiveData<CurrentType>
         get() = _currentType
 
@@ -122,17 +123,9 @@ class AddViewModel @Inject constructor(): ViewModel(), OnClickAddCategoryListene
     fun setCurrentType(type: CurrentType) {
         _currentType.value = type
     }
-
-    override fun onClickAddCategory(id: Int) {
-
-    }
 }
 
 
-
-interface OnClickAddCategoryListener {
-    fun onClickAddCategory(id: Int)
-}
 enum class CurrentType {
     PICTURE, CATEGORY, EMOTION
 }
