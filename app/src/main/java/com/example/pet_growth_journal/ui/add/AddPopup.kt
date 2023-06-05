@@ -63,6 +63,7 @@ class AddPopupFragment(
     private val addCategoryAdapter by lazy {
         AddCategoryAdapter(requireContext(), onClickCategory = { category ->
             Log.d("HWO", "addcategory click -> $category")
+            addViewModel.onClickCategory(category.id)
 
         },)
     }
@@ -88,7 +89,7 @@ class AddPopupFragment(
                 viewModel = addViewModel
             }
 
-        addViewModel.setCurrentType(CurrentType.CATEGORY)
+        addViewModel.setCurrentType(CurrentType.PICTURE)
 
         initObserver(addPopupController)
 
@@ -106,6 +107,9 @@ class AddPopupFragment(
         addViewModel.addCategorys.observe(viewLifecycleOwner) {
             Log.d("HWO", "Addcategorys --> $it")
             addCategoryAdapter.submitList(it)
+            addCategoryAdapter.notifyDataSetChanged()
+            addViewModel.setCurrentType(CurrentType.EMOTION)
+
         }
 
         return binding.root

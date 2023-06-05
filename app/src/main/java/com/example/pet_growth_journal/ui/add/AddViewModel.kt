@@ -29,7 +29,6 @@ class AddViewModel @Inject constructor(): ViewModel(){
         get() = _addCategorys
 
     init {
-        addDummyCategory()
     }
 
     private fun addDummyCategory() {
@@ -49,60 +48,60 @@ class AddViewModel @Inject constructor(): ViewModel(){
                 isSelected = false
             ),
             AddCategoryModel(
-                id = 0,
+                id = 2,
                 category = "약 먹기",
                 icon = R.drawable.ic_medicine_black,
                 selectIcon = R.drawable.ic_medicine_white,
                 isSelected = false
             ),
             AddCategoryModel(
-                id = 0,
+                id = 3,
                 category = "목욕",
                 icon = R.drawable.ic_bath_black,
                 selectIcon = R.drawable.ic_bath_white,
                 isSelected = false
             ),AddCategoryModel(
-                id = 0,
+                id = 4,
                 category = "병원",
                 icon = R.drawable.ic_hospital_black,
                 selectIcon = R.drawable.ic_hospital_white,
                 isSelected = false
             ),AddCategoryModel(
-                id = 0,
+                id = 5,
                 category = "산책",
                 icon = R.drawable.ic_walk_black,
                 selectIcon = R.drawable.ic_walk_white,
                 isSelected = false
             ),AddCategoryModel(
-                id = 0,
+                id = 6,
                 category = "수면",
                 icon = R.drawable.ic_sleep_black,
                 selectIcon = R.drawable.ic_sleep_white,
                 isSelected = false
             ),
             AddCategoryModel(
-                id = 0,
+                id = 7,
                 category = "실내놀이",
                 icon = R.drawable.ic_inside_black,
                 selectIcon = R.drawable.ic_inside_white,
                 isSelected = false
             ),
             AddCategoryModel(
-                id = 0,
+                id = 8,
                 category = "실외놀이",
                 icon = R.drawable.ic_outside_black,
                 selectIcon = R.drawable.ic_outside_white,
                 isSelected = false
             ),
             AddCategoryModel(
-                id = 0,
+                id = 9,
                 category = "이벤트",
                 icon = R.drawable.ic_event_black,
                 selectIcon = R.drawable.ic_event_white,
                 isSelected = false
             ),
             AddCategoryModel(
-                id = 0,
+                id = 10,
                 category = "기타",
                 icon = R.drawable.ic_plus_black,
                 selectIcon = R.drawable.ic_plus_white,
@@ -121,7 +120,34 @@ class AddViewModel @Inject constructor(): ViewModel(){
     }
 
     fun setCurrentType(type: CurrentType) {
+        if (type == CurrentType.CATEGORY) {
+            addDummyCategory()
+        }
         _currentType.value = type
+    }
+
+    fun onClickCategory(id: Int) {
+        val data = addCategorys.value?.map {
+            if (it.id == id) {
+                AddCategoryModel(
+                    id = it.id,
+                    category = it.category,
+                    icon = it.icon,
+                    selectIcon = it.selectIcon,
+                    isSelected = true
+                )
+            } else {
+                AddCategoryModel(
+                    id = it.id,
+                    category = it.category,
+                    icon = it.icon,
+                    selectIcon = it.selectIcon,
+                    isSelected = false
+                )
+            }
+        }
+       _addCategorys.value = data
+
     }
 }
 
