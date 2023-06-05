@@ -24,18 +24,8 @@ class AddViewModel @Inject constructor(): ViewModel(), OnClickAddCategoryListene
         get() = _pictureType
 
     private val _addCategorys = MutableLiveData<List<AddCategoryModel>>()
-    val addCategorys: LiveData<List<RecyclerItem>>
-        get() = Transformations.map(_addCategorys) { model ->
-            model.map { addCategoryModel ->
-                AddCategoryModel(
-                    addCategoryModel.id,
-                    addCategoryModel.category,
-                    addCategoryModel.icon,
-                    addCategoryModel.isSelected
-                ).toRecyclerItem(this)
-            }
-        }
-
+    val addCategorys: LiveData<List<AddCategoryModel>>
+        get() = _addCategorys
 
     init {
         addDummyCategory()
@@ -47,63 +37,74 @@ class AddViewModel @Inject constructor(): ViewModel(), OnClickAddCategoryListene
                 id = 0,
                 category = "간식",
                 icon = R.drawable.ic_snack_black,
+                selectIcon = R.drawable.ic_snack,
                 isSelected = false
             ),
             AddCategoryModel(
                 id = 1,
                 category = "물 마시기",
                 icon = R.drawable.ic_water_black,
+                selectIcon = R.drawable.ic_water,
                 isSelected = false
             ),
             AddCategoryModel(
                 id = 0,
                 category = "약 먹기",
                 icon = R.drawable.ic_medicine_black,
+                selectIcon = R.drawable.ic_medicine_white,
                 isSelected = false
             ),
             AddCategoryModel(
                 id = 0,
                 category = "목욕",
                 icon = R.drawable.ic_bath_black,
+                selectIcon = R.drawable.ic_bath_white,
                 isSelected = false
             ),AddCategoryModel(
                 id = 0,
                 category = "병원",
                 icon = R.drawable.ic_hospital_black,
+                selectIcon = R.drawable.ic_hospital_white,
                 isSelected = false
             ),AddCategoryModel(
                 id = 0,
                 category = "산책",
                 icon = R.drawable.ic_walk_black,
+                selectIcon = R.drawable.ic_walk_white,
                 isSelected = false
             ),AddCategoryModel(
                 id = 0,
                 category = "수면",
                 icon = R.drawable.ic_sleep_black,
+                selectIcon = R.drawable.ic_sleep_white,
                 isSelected = false
             ),
             AddCategoryModel(
                 id = 0,
                 category = "실내놀이",
                 icon = R.drawable.ic_inside_black,
+                selectIcon = R.drawable.ic_inside_white,
                 isSelected = false
             ),
             AddCategoryModel(
                 id = 0,
                 category = "실외놀이",
                 icon = R.drawable.ic_outside_black,
+                selectIcon = R.drawable.ic_outside_white,
                 isSelected = false
             ),
             AddCategoryModel(
                 id = 0,
                 category = "이벤트",
                 icon = R.drawable.ic_event_black,
+                selectIcon = R.drawable.ic_event_white,
                 isSelected = false
             ),
             AddCategoryModel(
                 id = 0,
                 category = "기타",
                 icon = R.drawable.ic_plus_black,
+                selectIcon = R.drawable.ic_plus_white,
                 isSelected = false
             ),
 
@@ -127,28 +128,7 @@ class AddViewModel @Inject constructor(): ViewModel(), OnClickAddCategoryListene
     }
 }
 
-data class AddCategoryModel(
-    val id: Int,
-    val category: String,
-    val icon: Int,
-    val isSelected: Boolean = false
-): RecyclerItemComparator {
-    override fun isSameContent(other: Any): Boolean {
-        return this == (other as AddCategoryModel)
-    }
 
-    override fun isSameItem(other: Any): Boolean {
-        return false
-    }
-}
-
-fun AddCategoryModel.toRecyclerItem(onClickAddCategoryListener: OnClickAddCategoryListener) = RecyclerItem(
-    BR.model to this,
-    listOf(
-        BR.actionListener to onClickAddCategoryListener
-    ),
-    R.layout.item_add_category
-)
 
 interface OnClickAddCategoryListener {
     fun onClickAddCategory(id: Int)

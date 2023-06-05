@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.CancellationSignal
 import android.provider.MediaStore
+import android.util.Log
 import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.pet_growth_journal.MainViewModel
 import com.example.pet_growth_journal.R
 import com.example.pet_growth_journal.databinding.CommonAddBottomPopupBinding
@@ -52,8 +55,11 @@ class AddPopup(
 
 class AddPopupFragment(
     private val viewModelPopupController: ViewModelPopupController
-): Fragment() {
+) : Fragment() {
     lateinit var binding: CommonAddBottomPopupBinding
+
+        private val addViewModel: AddViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,15 +79,68 @@ class AddPopupFragment(
                 lifecycleOwner = viewLifecycleOwner
                 controller = addPopupController
                 popupController = viewModelPopupController
+                viewModel = addViewModel
             }
 
-        addPopupController.setCurrentType(CurrentType.PICTURE)
+        addViewModel.setCurrentType(CurrentType.CATEGORY)
 
         initObserver(addPopupController)
 
+        val adapter = AddCategoryAdapter(requireContext(), this)
+        binding.rvCategory.adapter = adapter
+
+        val layoutManager = GridLayoutManager(context, 4)
+        binding.rvCategory.layoutManager = layoutManager
+//        val screenWidth = requireContext().resources.displayMetrics.widthPixels
+////        val padding = screenWidth % 4 // 한 줄에 표시할 아이템 수
+//        binding.rvCategory.setPadding(0, 0, 0, 0)
+//        binding.rvCategory.clipToPadding = false
+
+
+        addViewModel.addCategorys.observe(viewLifecycleOwner) {
+            Log.d("HWO", "Addcategorys --> $it")
+            adapter.submitList(it)
+        }
 
         return binding.root
     }
+    private fun pickFromGallery() {
+        val mimeType = arrayOf("image/jpeg", "image/png")
+        galleryLauncher.launch(Intent(Intent.ACTION_PICK).apply {
+            type = "image/*"
+            putExtra(Intent.EXTRA_MIME_TYPES, mimeType)
+        })
+    }
+
+    private fun pickFromCamera() {
+        cameraLauncher.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
+    }
+    val galleryLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            val imageBitmap = context?.contentResolver?.loadThumbnail(
+                (it.data?.data ?: "") as Uri,
+                Size(100, 100),
+                CancellationSignal()
+            )
+            binding.ivBackground.setImageBitmap(imageBitmap)
+            binding.ivSelectPicture.visibility = View.GONE
+            binding.ivBackground.visibility = View.VISIBLE
+            addViewModel.setCurrentType(CurrentType.CATEGORY)
+//            binding.ivSelectPicture.setImageBitmap(thumbnail)
+
+        }
+
+    val cameraLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            val bundle = it.data?.extras
+            val imageBitmap = bundle?.get("data") as Bitmap
+            binding.ivBackground.setImageBitmap(imageBitmap)
+            binding.ivSelectPicture.visibility = View.GONE
+            binding.ivBackground.visibility = View.VISIBLE
+            addViewModel.setCurrentType(CurrentType.CATEGORY)
+//            binding.ivSelectPicture.setImageBitmap(imageBitmap)
+        }
+
 
     private fun initObserver(addPopupController: AddPopupController) {
 
@@ -98,31 +157,7 @@ class AddPopupFragment(
 
         }
     }
-        private fun pickFromGallery() {
-        val mimeType = arrayOf("image/jpeg", "image/png")
-        galleryLauncher.launch(Intent(Intent.ACTION_PICK).apply {
-            type = "image/*"
-            putExtra(Intent.EXTRA_MIME_TYPES, mimeType)
-        })
-    }
 
-    private val galleryLauncher: ActivityResultLauncher<Intent> =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            val thumbnail = context?.contentResolver?.loadThumbnail((it.data?.data ?: "") as Uri, Size(100, 100), CancellationSignal())
-            binding.ivSelectPicture.setImageBitmap(thumbnail)
-
-        }
-
-    private fun pickFromCamera() {
-        cameraLauncher.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
-    }
-
-    private val cameraLauncher: ActivityResultLauncher<Intent> =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            val bundle = it.data?.extras
-            val imageBitmap = bundle?.get("data") as Bitmap
-            binding.ivSelectPicture.setImageBitmap(imageBitmap)
-        }
 
 
 //    private val addViewModel: AddViewModel by viewModels()
@@ -154,41 +189,14 @@ class AddPopupFragment(
 //        return binding.root
 //    }
 //
-//    private fun pickFromGallery() {
-//        val mimeType = arrayOf("image/jpeg", "image/png")
-//        galleryLauncher.launch(Intent(Intent.ACTION_PICK).apply {
-//            type = "image/*"
-//            putExtra(Intent.EXTRA_MIME_TYPES, mimeType)
-//        })
-//    }
-//
-//    private val galleryLauncher: ActivityResultLauncher<Intent> =
-//        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-//            val thumbnail = context?.contentResolver?.loadThumbnail((it.data?.data ?: "") as Uri, Size(100, 100), CancellationSignal())
-//            binding.ivSelectPicture.setImageBitmap(thumbnail)
-//            binding.btnDummyPicture.visibility = View.VISIBLE
-//
-//        }
-//
-//    private fun pickFromCamera() {
-//        cameraLauncher.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
-//    }
-//
-//    private val cameraLauncher: ActivityResultLauncher<Intent> =
-//        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-//            val bundle = it.data?.extras
-//            val imageBitmap = bundle?.get("data") as Bitmap
-//            binding.ivSelectPicture.setImageBitmap(imageBitmap)
-//            binding.btnDummyPicture.visibility = View.VISIBLE
-//        }
-//
+
 //    override fun onDestroyView() {
 //        super.onDestroyView()
 //        _binding = null
 //    }
 }
 
-class AddPopupDelegate: AddPopupController {
+class AddPopupDelegate : AddPopupController {
     private val _currentType: MutableLiveData<CurrentType> = MutableLiveData()
     override val currentType: LiveData<CurrentType>
         get() = _currentType
@@ -213,7 +221,7 @@ class AddPopupDelegate: AddPopupController {
 
 }
 
-interface AddPopupController: PopupController {
+interface AddPopupController : PopupController {
     fun setCurrentType(type: CurrentType)
     val currentType: LiveData<CurrentType>
     fun onClickGallery()

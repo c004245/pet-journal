@@ -18,36 +18,35 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@{model.selected ? @drawable/background_radius_16_add_category_select : @drawable/background_radius_16_add_category_unselect}"
+        android:id="@+id/cl_category"
         android:onClick="@{() -> actionListener.onClickAddCategory(model.id)}"
         tools:background="@drawable/background_radius_16_add_category_select">
 
         <ImageView
             android:layout_width="wrap_content"
+            android:layout_marginHorizontal="22dp"
             android:layout_height="wrap_content"
+            app:layout_constraintVertical_chainStyle="packed"
             android:id="@+id/iv_add_category"
-            app:categoryBackground="@{model.icon}"
-            android:background="@drawable/ic_snack_white"
+            android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="12dp"
-            android:layout_marginHorizontal="22dp" />
+            app:layout_constraintBottom_toTopOf="@+id/tv_category"
+             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Text.NotoSans.Medium"
+            android:layout_marginTop="2dp"
             android:textSize="12sp"
             tools:text="간식"
-            android:text="@{model.category}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_add_category"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="12dp"
-            android:textColor="@{model.selected ? @color/white : @color/black_21}" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:id="@+id/tv_category"
+            android:layout_marginBottom="12dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
