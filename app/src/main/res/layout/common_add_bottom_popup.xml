@@ -60,6 +60,13 @@
                 android:id="@+id/group_category"
                 android:visibility="@{viewModel.currentType == CurrentType.CATEGORY ? View.VISIBLE : View.GONE}"
                 app:constraint_referenced_ids="rv_category"/>
+
+            <androidx.constraintlayout.widget.Group
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/group_emotion"
+                android:visibility="@{viewModel.currentType == CurrentType.EMOTION ? View.VISIBLE : View.GONE}"
+                app:constraint_referenced_ids="rv_emotion" />
             <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_choice_view"
                         android:layout_width="0dp"
@@ -199,6 +206,23 @@
                 tools:itemCount="4"
                 tools:listitem="@layout/item_add_category"
                 android:layout_marginTop="24dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_appbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:clipToPadding="false"
+                android:layout_marginHorizontal="12dp"
+                android:id="@+id/rv_emotion"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_add_emotion"
+                android:layout_marginTop="24dp" />
+
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

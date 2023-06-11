@@ -68,6 +68,13 @@ class AddPopupFragment(
         },)
     }
 
+    private val addEmotionAdapter by lazy {
+        AddEmotionAdapter(requireContext(), onClickEmotion = { emotion ->
+            Log.d("HWO", "add emotion click -> $emotion")
+            addViewModel.onClickEmotion(emotion.id)
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -98,18 +105,22 @@ class AddPopupFragment(
 
         val layoutManager = GridLayoutManager(context, 4)
         binding.rvCategory.layoutManager = layoutManager
-//        val screenWidth = requireContext().resources.displayMetrics.widthPixels
-////        val padding = screenWidth % 4 // 한 줄에 표시할 아이템 수
-//        binding.rvCategory.setPadding(0, 0, 0, 0)
-//        binding.rvCategory.clipToPadding = false
 
+
+        binding.rvEmotion.adapter = addEmotionAdapter
+        val emotionLayoutManager = GridLayoutManager(context, 4)
+        binding.rvEmotion.layoutManager = emotionLayoutManager
 
         addViewModel.addCategorys.observe(viewLifecycleOwner) {
             Log.d("HWO", "Addcategorys --> $it")
             addCategoryAdapter.submitList(it)
             addCategoryAdapter.notifyDataSetChanged()
             addViewModel.setCurrentType(CurrentType.EMOTION)
+        }
 
+        addViewModel.addEmotions.observe(viewLifecycleOwner) {
+            addEmotionAdapter.submitList(it)
+            addEmotionAdapter.notifyDataSetChanged()
         }
 
         return binding.root

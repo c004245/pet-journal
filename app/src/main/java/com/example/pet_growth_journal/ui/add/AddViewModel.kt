@@ -1,15 +1,9 @@
 package com.example.pet_growth_journal.ui.add
 
-import android.graphics.drawable.Drawable
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.example.pet_growth_journal.BR
 import com.example.pet_growth_journal.R
-import com.example.pet_growth_journal.util.RecyclerItem
-import com.example.pet_growth_journal.util.RecyclerItemComparator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -28,9 +22,65 @@ class AddViewModel @Inject constructor(): ViewModel(){
     val addCategorys: LiveData<List<AddCategoryModel>>
         get() = _addCategorys
 
+
+    private val _addEmotions = MutableLiveData<List<AddEmotionModel>>()
+    val addEmotions: LiveData<List<AddEmotionModel>>
+        get() = _addEmotions
+
     init {
     }
 
+    private fun addDummyEmotion() {
+        _addEmotions.value = listOf(
+            AddEmotionModel(
+                id = 0,
+                icon = R.drawable.ic_smile_emotion_unselect,
+                selectIcon = R.drawable.ic_smile_emotion_select
+            ),
+            AddEmotionModel(
+                id = 1,
+                icon = R.drawable.ic_none_emotion_unselect,
+                selectIcon = R.drawable.ic_none_emotion_select
+            ),
+
+            AddEmotionModel(
+                id = 2,
+                icon = R.drawable.ic_hurt_emotion_unselect,
+                selectIcon = R.drawable.ic_hurt_emotion_select
+            ),
+
+            AddEmotionModel(
+                id = 3,
+                icon = R.drawable.ic_happy_emotion_unselect,
+                selectIcon = R.drawable.ic_happy_emotion_select
+            ),
+
+            AddEmotionModel(
+                id = 4,
+                icon = R.drawable.ic_kiss_emotion_unselect,
+                selectIcon = R.drawable.ic_kiss_emotion_select
+            ),
+
+            AddEmotionModel(
+                id = 5,
+                icon = R.drawable.ic_happy2_emotion_unselect,
+                selectIcon = R.drawable.ic_happy2_emotion_select
+            ),
+
+            AddEmotionModel(
+                id = 6,
+                icon = R.drawable.ic_sad_emotion_unselect,
+                selectIcon = R.drawable.ic_sad_emotion_select
+            ),
+
+            AddEmotionModel(
+                id = 7,
+                icon = R.drawable.ic_angry_emotion_unselect,
+                selectIcon = R.drawable.ic_angry_emotion_select
+            ),
+        )
+
+    }
     private fun addDummyCategory() {
         _addCategorys.value = listOf(
             AddCategoryModel(
@@ -107,21 +157,14 @@ class AddViewModel @Inject constructor(): ViewModel(){
                 selectIcon = R.drawable.ic_plus_white,
                 isSelected = false
             ),
-
-
         )
-    }
-    fun onClickCamera() {
-        _pictureType.value = PictureType.CAMERA
-    }
-
-    fun onClickGallery() {
-        _pictureType.value = PictureType.GALLERY
     }
 
     fun setCurrentType(type: CurrentType) {
         if (type == CurrentType.CATEGORY) {
             addDummyCategory()
+        } else if (type == CurrentType.EMOTION) {
+            addDummyEmotion()
         }
         _currentType.value = type
     }
@@ -147,6 +190,27 @@ class AddViewModel @Inject constructor(): ViewModel(){
             }
         }
        _addCategorys.value = data
+    }
+
+    fun onClickEmotion(id: Int) {
+        val data = addEmotions.value?.map {
+            if (it.id == id) {
+                AddEmotionModel(
+                    id = it.id,
+                    icon = it.icon,
+                    selectIcon = it.selectIcon,
+                    isSelected = true
+                )
+            } else {
+                AddEmotionModel(
+                    id = it.id,
+                    icon = it.icon,
+                    selectIcon = it.selectIcon,
+                    isSelected = false
+                )
+            }
+        }
+        _addEmotions.value = data
 
     }
 }
