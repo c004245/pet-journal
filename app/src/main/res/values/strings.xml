@@ -32,6 +32,7 @@
     <string name="text_pet_type">견종</string>
     <string name="text_pet_birth">생년월일</string>
     <string name="text_add_picture">사진 추가</string>
+    <string name="text_save">기록 저장</string>
 
 
 </resources>

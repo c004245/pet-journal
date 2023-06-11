@@ -28,6 +28,7 @@ import com.example.pet_growth_journal.ui.common.BottomDialogPopupFragment
 import com.example.pet_growth_journal.ui.common.PopupController
 import com.example.pet_growth_journal.ui.common.PopupTransactionProvider
 import com.example.pet_growth_journal.ui.common.ViewModelPopupController
+import com.example.pet_growth_journal.util.SingleLiveEvent
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.lang.IllegalStateException
 
@@ -121,6 +122,10 @@ class AddPopupFragment(
         addViewModel.addEmotions.observe(viewLifecycleOwner) {
             addEmotionAdapter.submitList(it)
             addEmotionAdapter.notifyDataSetChanged()
+        }
+
+        binding.tvNoPicture.setOnClickListener {
+            addViewModel.setCurrentType(CurrentType.CATEGORY)
         }
 
         return binding.root
@@ -222,7 +227,7 @@ class AddPopupDelegate : AddPopupController {
     override val currentType: LiveData<CurrentType>
         get() = _currentType
 
-    private val _pictureType: MutableLiveData<PictureType> = MutableLiveData()
+    private val _pictureType= SingleLiveEvent<PictureType>()
     override val pictureType: LiveData<PictureType>
         get() = _pictureType
 
